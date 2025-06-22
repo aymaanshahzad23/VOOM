@@ -1,18 +1,13 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8000';
-
-export const fetchCabEstimates = async (pickup, drop) => {
+export const getFareEstimates = async (pickup, drop) => {
   try {
-    const response = await axios.get(`${BASE_URL}/compare`, {
-      params: {
-        pickup,
-        drop
-      }
+    const res = await axios.get('http://127.0.0.1:8000/compare', {
+      params: { pickup, drop }
     });
-    return response.data;
-  } catch (error) {
-    console.error("❌ Error fetching cab estimates:", error.response?.data || error.message);
-    throw error;
+    return res.data;
+  } catch (err) {
+    console.error("API error:", err);
+    throw err;
   }
 };
